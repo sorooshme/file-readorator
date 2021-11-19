@@ -1,6 +1,6 @@
 {
   "name": "file-readorator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "description": "A simple decorator which reads the content of the file.",
   "main": "dist/index.js",
