@@ -1,11 +1,11 @@
 {
   "name": "file-readorator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "description": "A simple decorator which reads the content of the file.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "rm -rf dist && tsc"
   },
   "keywords": [],
   "author": "",

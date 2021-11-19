@@ -26,6 +26,12 @@ export interface FileReadoratorOption {
    * Transforms the content of file.
    */
   transformer?(value: string): any;
+
+  /**
+   * Whether to throw an error when accessing uninitialized property or not.
+   * @default true
+   */
+  throwOnUndefined?: boolean;
 }
 
 /**
@@ -39,6 +45,7 @@ export const FileReadorator =
   (_target, propertyKey) => {
     let filePath: string | undefined = undefined;
     const cache = option?.cache ?? true;
+    const throwOnUndefined = option?.throwOnUndefined ?? true;
     const canChange = option?.canChange ?? true;
     const encoding: BufferEncoding = option?.encoding ?? "utf8";
     const transformer = option?.transformer;
@@ -48,11 +55,15 @@ export const FileReadorator =
     return {
       get: function (this: Record<string | symbol, any>) {
         if (filePath === undefined) {
-          throw new Error(
-            `property '${String(
-              propertyKey
-            )}' is not initialized yet and thus can not be accessed.`
-          );
+          if (throwOnUndefined === true) {
+            throw new Error(
+              `property '${String(
+                propertyKey
+              )}' is not initialized yet and thus can not be accessed.`
+            );
+          }
+
+          return undefined;
         }
 
         if (currentValue !== undefined && cache === true) {
