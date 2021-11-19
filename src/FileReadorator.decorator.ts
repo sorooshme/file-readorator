@@ -56,7 +56,6 @@ export const FileReadorator =
         }
 
         if (currentValue !== undefined && cache === true) {
-          console.log("using cache");
           return currentValue;
         }
 
